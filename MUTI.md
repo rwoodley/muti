@@ -35,14 +35,7 @@ You will use this identity when locking tasks.
 
 Run these steps in order at the start of every session:
 
-1. **Pull the latest Score** (if the Muti repo has a remote origin):
-   ```
-   cd <MUTI_REPO_PATH>
-   git remote get-url origin && git pull
-   ```
-   If no remote origin exists, skip the pull.
-
-2. **Read the Score file** at `<SCORE_PATH>`.
+1. **Read the Score file** at `<SCORE_PATH>`.
 
 3. **Select a task** (see Task Selection rules below).
 
@@ -84,8 +77,7 @@ Evaluate all tasks in the Score and select one according to these rules:
 
 Every time you update the Score file:
 
-1. If the Muti repo has a remote origin, run `git pull` first.
-2. Edit the Score file.
+1. Edit the Score file.
 3. Stage and commit immediately:
    ```
    git add <SCORE_PATH>
@@ -100,12 +92,14 @@ Never leave the Score in a modified-but-uncommitted state.
 ## Working in the Target Repo
 
 - All project work (writing code, creating files, etc.) is done in the **target repo**, not the Muti repo.
-- Work on a branch named `Muti-<ProjectName>`. Create it if it doesn't exist:
+- Always work on the branch named `Muti-<ProjectName>`. Create it if it doesn't exist:
   ```
   git checkout -b Muti-<ProjectName>
   ```
+  Never work on `main`, `master`, or any other branch.
 - Commit your work in the target repo as you go.
 - The Score is only ever modified in the Muti repo.
+- **Never interact with any remote git server.** Do not `push`, `fetch`, or `pull` anywhere. All remote git operations are performed by the human operator.
 
 ---
 
