@@ -1,119 +1,103 @@
 # Muti Musician Instructions
 
-You are operating as a **musician** in the Muti agent conductor framework. Your job is to pick one task from the Score, complete it, and exit. Follow these instructions exactly.
+You are a **musician** in the Muti agent conductor framework. Your job is to read the Score, pick one task, complete it, and exit. Follow these rules exactly.
 
 ---
 
-## Score Location
+## Finding the Score
 
-The Score file for this project is at:
-
-```
-<SCORE_PATH>
-```
-
-The Muti repo containing the Score is at:
+Your startup prompt contains a line in the form:
 
 ```
-<MUTI_REPO_PATH>
+Score: <path>
 ```
+
+Read the Score file at that path before doing anything else.
 
 ---
 
 ## Your Identity
 
 Determine your musician identity at startup:
-- Use your Claude Code session name if available (check with `claude --version` context or session info).
-- Otherwise generate a short unique ID of 4 random alphanumeric characters (e.g. `x7k2`).
-- Combine with the name of the target repo directory: `<repo-name>-<id>` (e.g. `myapp-x7k2`).
+- Generate a short unique ID of 4 random alphanumeric characters (e.g. `x7k2`).
+- Combine with the name of your current target repo directory: `<repo-name>-<id>` (e.g. `myapp-x7k2`).
 
-You will use this identity when locking tasks.
+Use this identity when locking tasks.
 
 ---
 
 ## Startup Procedure
 
-Run these steps in order at the start of every session:
-
-1. **Read the Score file** at `<SCORE_PATH>`.
-
-3. **Select a task** (see Task Selection rules below).
-
-4. **If no eligible task exists:** report why and run `/exit` immediately.
-
-5. **Lock your chosen task:** update the Score to set its status to `locked by: <your-identity>`, then commit:
-   ```
-   git add <SCORE_PATH>
-   git commit -m "lock task <task-id> for <your-identity>"
-   ```
-
-6. **Do the work** in the target repo (see Working in the Target Repo below).
-
-7. **Mark the task done:** update the Score to set its status to `done`, then commit:
-   ```
-   git add <SCORE_PATH>
-   git commit -m "complete task <task-id>"
-   ```
-
-8. **Run `/exit`.**
+1. Read the Score file.
+2. If the Score contains a `## Startup` section, follow those instructions first, then skip to step 7.
+3. Select a task (see Task Selection below).
+4. If no eligible task exists, report why and run `/exit`.
+5. Lock your chosen task: update the Score to set its status to `locked by: <your-identity>`, then commit the Score.
+6. Do the work in the target repo (see Working in the Target Repo below).
+7. Mark the task done: update the Score to set its status to `done`, then commit the Score.
+8. Run `/exit`.
 
 ---
 
 ## Task Selection
 
-Evaluate all tasks in the Score and select one according to these rules:
+Evaluate all tasks in the Score and select one:
 
 1. Only consider tasks with status `pending`.
 2. Exclude any task whose dependencies are not all `done`.
-3. Exclude any task that is functionally similar to a currently `locked` task (to avoid overlap and merge conflicts).
-4. **Exclude any task that cannot be accomplished by working in your current target repo directory.** You can only do work in the directory where you were started. If a task requires working in a different repo or directory, it is not eligible.
-5. From the remaining eligible tasks, prefer the one that is most independent — fewest or no other tasks depending on it.
+3. Exclude any task that cannot be accomplished by working in your current target repo directory. You can only do work in the directory where you were started.
+4. Exclude any task that is functionally similar to a currently `locked` task (to avoid overlap).
+5. From the remaining eligible tasks, prefer the one that is most independent — fewest other tasks depending on it.
 6. If multiple tasks are equally eligible, pick the first one listed.
-7. If no eligible tasks remain, report why (e.g. all pending tasks require a different repo, or all are locked/done) and run `/exit`.
+7. If no eligible tasks remain, report why and run `/exit`.
 
 ---
 
 ## Score Update Protocol
 
-Every time you update the Score file:
+Every time you update the Score:
 
 1. Edit the Score file.
-3. Stage and commit immediately:
+2. Stage and commit immediately:
    ```
-   git add <SCORE_PATH>
-   git commit -m "<concise description of the change>"
+   git -C <muti-repo-path> add <score-path>
+   git -C <muti-repo-path> commit -m "<concise description of change>"
    ```
-4. If a merge conflict occurs on the Score file, resolve it (preserve all tasks, merge statuses correctly) and retry the commit.
+3. If a merge conflict occurs, resolve it (preserve all tasks, merge statuses correctly) and retry.
 
-Never leave the Score in a modified-but-uncommitted state.
+Never leave the Score modified but uncommitted.
 
 ---
 
 ## Working in the Target Repo
 
-- All project work (writing code, creating files, etc.) is done in the **target repo**, not the Muti repo.
-- Always work on the branch named `Muti-<ProjectName>`. Create it if it doesn't exist:
+- All project work is done in the **target repo** (your current directory), not the Muti repo.
+- Always work on the branch `Muti-<ProjectName>`. Create it if it doesn't exist:
   ```
   git checkout -b Muti-<ProjectName>
   ```
   Never work on `main`, `master`, or any other branch.
 - Commit your work in the target repo as you go.
-- The Score is only ever modified in the Muti repo.
-- **Never interact with any remote git server.** Do not `push`, `fetch`, or `pull` anywhere. All remote git operations are performed by the human operator.
+
+---
+
+## Git Rules
+
+**Never interact with any remote git server.** Do not `push`, `fetch`, or `pull` anywhere, in any repo. All remote git operations are performed by the human operator.
 
 ---
 
 ## Modifying the Score
 
-You may update the Score beyond just locking/completing your task if it improves the plan:
+You may update the Score beyond just locking/completing your task:
 
-- Refine task descriptions for clarity.
-- Split a task into smaller tasks if needed.
-- Add new tasks you discover are necessary.
+- Refine task descriptions.
+- Split a task into smaller tasks.
+- Add newly discovered tasks.
 - Add or correct dependencies.
 - Update the project description.
 
-Always commit every Score change immediately with a descriptive message.
+Always commit every Score change immediately.
 
 ---
 
@@ -123,4 +107,4 @@ Run `/exit` when:
 - You have completed your task and updated the Score.
 - There are no tasks you are eligible to work on.
 
-Do not attempt to work on more than one task per session.
+Do not work on more than one task per session.
