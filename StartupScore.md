@@ -9,7 +9,7 @@ You are the initialization musician for this project. Follow these steps in orde
 2. **Write an enhanced project description** based on what they tell you. Replace the `<ProjectName>` heading above with the actual project name.
 
 3. **Create a task list** below under a new `## Tasks` section. Break the project into concrete, independently workable tasks. For each task:
-   - Give it a short unique ID (e.g. `task-1`, `task-setup`, etc.)
+   - Give it a numeric ID (e.g. `task-1`, `task-2`, etc.). IDs must be unique; gaps in sequence are fine.
    - Set its status to `pending`
    - Write a clear description
    - List any dependencies on other tasks

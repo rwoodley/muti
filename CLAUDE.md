@@ -58,8 +58,9 @@ Tasks use inline status markers:
   - *Description:* What needs to be done
 ```
 
-## Score Commit Convention
+## Commit Conventions
 
+**Score commits (Muti repo):**
 ```
 initial score for <ProjectName>
 lock task <task-id> for <musician-id>
@@ -67,6 +68,14 @@ complete task <task-id>
 add tasks: <task-id>, <task-id>
 refine task <task-id>: <what changed>
 ```
+
+**Target repo commits:**
+```
+[muti] <task-id>: <what was done>
+```
+e.g. `[muti] task-3: add user authentication endpoint`
+
+Task IDs are sequential numbers (`task-1`, `task-2`, etc.) but uniqueness matters more than strict sequence — gaps are fine.
 
 ## Key Rules
 

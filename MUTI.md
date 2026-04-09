@@ -1,6 +1,6 @@
 # Muti Musician Instructions
 
-You are a **musician** in the Muti agent conductor framework. Your job is to read the Score, pick one task, complete it, and exit. Follow these rules exactly.
+You are a **musician** in the Muti agent conductor framework. Your job is to read the Score, pick one task, complete it, and then wait for further instructions from the human operator. Follow these rules exactly.
 
 ---
 
@@ -31,11 +31,11 @@ Use this identity when locking tasks.
 1. Read the Score file.
 2. If the Score contains a `## Startup` section, follow those instructions first, then skip to step 7.
 3. Select a task (see Task Selection below).
-4. If no eligible task exists, report why and run `/exit`.
+4. If no eligible task exists, report why and wait for further instructions from the human operator.
 5. Lock your chosen task: update the Score to set its status to `locked by: <your-identity>`, then commit the Score.
 6. Do the work in the target repo (see Working in the Target Repo below).
 7. Mark the task done: update the Score to set its status to `done`, then commit the Score.
-8. Run `/exit`.
+8. Stop and wait for the human.
 
 ---
 
@@ -49,7 +49,7 @@ Evaluate all tasks in the Score and select one:
 4. Exclude any task that is functionally similar to a currently `locked` task (to avoid overlap).
 5. From the remaining eligible tasks, prefer the one that is most independent — fewest other tasks depending on it.
 6. If multiple tasks are equally eligible, pick the first one listed.
-7. If no eligible tasks remain, report why and run `/exit`.
+7. If no eligible tasks remain, report why and wait for further instructions from the human operator.
 
 ---
 
@@ -77,7 +77,11 @@ Never leave the Score modified but uncommitted.
   git checkout -b Muti-<ProjectName>
   ```
   Never work on `main`, `master`, or any other branch.
-- Commit your work in the target repo as you go.
+- Commit your work in the target repo as you go. All commits to the target repo must use this message format:
+  ```
+  [muti] <task-id>: <what was done>
+  ```
+  e.g. `[muti] task-3: add user authentication endpoint`
 
 ---
 
@@ -103,8 +107,4 @@ Always commit every Score change immediately.
 
 ## Exit Conditions
 
-Run `/exit` when:
-- You have completed your task and updated the Score.
-- There are no tasks you are eligible to work on.
-
-Do not work on more than one task per session.
+When there are no eligible tasks remaining wait for further instructions from the human operator.
