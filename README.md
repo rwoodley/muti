@@ -11,6 +11,8 @@ Each musician reads a shared **Score** (a markdown task list), picks one task, l
 - [Claude Code](https://claude.ai/code) installed and authenticated.
 - This repo cloned locally.
 
+> **Note:** `RunMusician.sh` launches Claude with `--permission-mode acceptEdits`, which automatically accepts file read and edit operations without prompting. Bash commands that could be dangerous will still require your approval.
+
 Add this alias to your shell profile (`.zshrc`, `.bashrc`, etc.), replacing `<pathToMuti>` with the path where you cloned this repo:
 
 ```bash
@@ -28,7 +30,7 @@ alias runmusician='~/<pathToMuti>/RunMusician.sh'
 
 ---
 
-## Starting a New Project
+## Starting or Resuming a Project
 
 From your target repo directory, run:
 
@@ -36,26 +38,10 @@ From your target repo directory, run:
 runmusician <ProjectName>
 ```
 
-This will:
-1. Create a new Score file (`<pathToMuti>/<ProjectName>.md`) from the startup template.
-2. Launch a musician who will ask you to describe the project, flesh out the tasks, and set up the working branch.
+- **First run:** creates a new Score from the startup template, then launches a musician who interviews you, fleshes out the tasks, and sets up the working branch.
+- **Subsequent runs:** launches a musician who reads the existing Score, picks an eligible task, works on it, and waits for your instructions when done.
 
-**Example:**
-```bash
-cd ~/code/my-repo
-runmusician <ProjectName>
-```
-
----
-
-## Running a Musician on an Existing Project
-
-```bash
-cd ~/code/my-repo
-runmusician <ProjectName>
-```
-
-The musician will read the Score, pick an eligible task, work on it, and wait for your instructions when done. You can then say:
+You can then say:
 
 - `Process the next task` — to have it continue.
 - `Keep processing tasks until there are no more` — to run autonomously until done.
