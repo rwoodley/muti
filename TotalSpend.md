@@ -13,7 +13,7 @@ Add a `total_spend` field to every `DEDUCTION` transaction item written to the `
 
 ### task-1
 
-**status:** pending
+**status:** locked by: lpserver-m4p2
 **target:** lpserver
 **description:**
 Write `total_spend` to DEDUCTION items and expose it through `LedgerTransaction`.
