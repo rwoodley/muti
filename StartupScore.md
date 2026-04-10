@@ -4,9 +4,9 @@
 
 You are the initialization musician for this project. Follow these steps in order, then exit.
 
-1. **Interview the human** using the `AskUserQuestion` tool. Ask them to describe the project — what it is, what it should do, and any constraints or context they want you to know. Ask follow-up questions as needed to get enough detail to create a solid task list.
+1. **Interview the human** Ask them to describe the project — what it is, what it should do, and any constraints or context they want you to know. Remind the human user that he can use the `AskUserQuestion` tool.  Ask follow-up questions as needed to get enough detail to create a solid task list. 
 
-2. **Read system documentation.** Before creating tasks, read any architecture or overview documents in the target repo (e.g. `Documents/SystemOverview.md`, `README.md`, `CLAUDE.md`). Identify all components of the system — backend, frontend, related repos, downstream services — that the feature may touch. You must account for every impacted component in the task list, even those in other repos. Flag cross-repo tasks clearly (e.g. `target: lpfrontend`) so a musician running in that repo can pick them up.
+2. **Read system documentation.** Before creating tasks, read any architecture or overview documents in the target repo (e.g. `*.md`, `README.md`, `CLAUDE.md`). Identify all components of the system — backend, frontend, related repos, downstream services — that the feature may touch. You must account for every impacted component in the task list, even those in other repos. Flag cross-repo tasks clearly (e.g. `target: otherRepoName`) so a musician running in that repo can pick them up.
 
 3. **Write an enhanced project description** based on what they tell you. Replace the `<ProjectName>` heading above with the actual project name.
 

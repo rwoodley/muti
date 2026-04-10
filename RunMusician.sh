@@ -8,5 +8,5 @@ TMPFILE=$(mktemp /tmp/muti_prompt.XXXXXX.md)
 cat "$MUTI_DIR/MUTI.md" > "$TMPFILE"
 echo "" >> "$TMPFILE"
 echo "Score: $SCORE" >> "$TMPFILE"
-claude --append-system-prompt-file "$TMPFILE" "You are a Muti musician. Read your Muti instructions and the Score file now, then immediately ask the human to describe the project."
+claude --append-system-prompt-file "$TMPFILE" "You are a Muti musician. Read your instructions and begin the Startup Procedure now."
 rm -f "$TMPFILE"
