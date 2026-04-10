@@ -12,7 +12,7 @@ Add a `total_spend` field to every `DEDUCTION` transaction item written to the `
 ## Components
 
 - **lpserver** — `Billing/DynamoDb/DynamoDbLedgerRepository.cs`, `Billing/LedgerTransaction.cs`
-- **lpclient** — frontend may optionally display `totalSpend` from `GET /api/billing/Records`; no server-side change required there
+- **lpclient** — billing page receives `totalSpend` in each deduction row from `GET /api/billing/Records` and should display it
 
 ---
 
@@ -42,3 +42,9 @@ Add a `total_spend` field to every `DEDUCTION` transaction item written to the `
 **status:** pending  
 **description:** Build the solution (`dotnet build`) and verify no compile errors.  
 **dependencies:** task-3, task-4
+
+### task-6
+**status:** pending  
+**target:** lpclient  
+**description:** On the billing page, display `totalSpend` from each deduction row returned by `GET /api/billing/Records`. Show it as a running cumulative spend figure (e.g. "Total spent: $X.XX") so the user can see their lifetime spend at a glance.  
+**dependencies:** none
