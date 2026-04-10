@@ -12,6 +12,12 @@ Add a `TotalSpend` column to the DynamoDB user balance ledger table. This is a r
 - **depends on:** (none)
 - **description:** Add a nullable `decimal? TotalSpend` parameter to the `LedgerTransaction` record in `Billing/LedgerTransaction.cs`. It is only populated for `Deduction` transactions; top-up rows leave it null.
 
+### task-3: Display TotalSpend in the frontend billing view
+- **status:** pending
+- **target:** lpfrontend
+- **depends on:** task-2
+- **description:** In the React frontend, update the billing/transaction history view to display the `totalSpend` field returned on each `DEDUCTION` row from `GET /api/billing/Records`. Show it as a running "Total spent" column alongside the existing balance column.
+
 ### task-2: Persist and deserialize TotalSpend in DynamoDbLedgerRepository
 - **status:** pending
 - **depends on:** task-1
