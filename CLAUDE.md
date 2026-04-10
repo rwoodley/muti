@@ -12,7 +12,7 @@ Muti coordinates multiple Claude Code instances ("musicians") working in paralle
 |------|---------|
 | `MUTI.md` | Immutable rules loaded into every musician via `--append-system-prompt-file`. Never edit this. |
 | `StartupScore.md` | Template copied when starting a new project. Contains init instructions for the first musician. |
-| `RunMusician` | Bash script to launch a musician. Creates the Score if new, errors if the project already exists. |
+| `RunMusician.sh` | Bash script to launch a musician. Creates the Score if new, errors if the project already exists. |
 | `<ProjectName>.md` | Score files for active projects |
 
 ## Starting a New Project
@@ -20,10 +20,10 @@ Muti coordinates multiple Claude Code instances ("musicians") working in paralle
 From the target repo directory, run:
 
 ```
-~/muti/RunMusician <ProjectName>
+~/muti/RunMusician.sh <ProjectName>
 ```
 
-RunMusician will:
+RunMusician.sh will:
 1. Check that `<ProjectName>.md` does not already exist (errors if it does).
 2. Copy `StartupScore.md` to `<ProjectName>.md` in this repo.
 3. Launch a musician with MUTI.md as the appended system prompt and the Score path in the startup prompt.
@@ -35,7 +35,7 @@ The first musician sees the `## Startup` section in the Score, initializes the p
 From the target repo directory:
 
 ```
-~/muti/RunMusician <ProjectName>
+~/muti/RunMusician.sh <ProjectName>
 ```
 
 The musician reads the Score, picks an eligible task, locks it, does the work, marks it done, commits, and exits.
