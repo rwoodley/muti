@@ -97,7 +97,7 @@ You may update the Score beyond just locking/completing your task:
 
 - Refine task descriptions.
 - Split a task into smaller tasks.
-- Add newly discovered tasks.
+- Add newly discovered tasks — including tasks in other repos or components (flag these with `target: <repo-name>` so a musician in that repo can pick them up).
 - Add or correct dependencies.
 - Update the project description.
 
