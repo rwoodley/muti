@@ -15,9 +15,10 @@ You are the initialization musician for this project. Follow these steps in orde
    - Set its status to `pending`
    - Write a clear description
    - List any dependencies on other tasks
-Flag cross-repo tasks clearly (e.g. `target: otherRepoName`) so a musician running in that repo can pick them up. If you identify an impacted component but cannot determine its repo name or path from the documentation, ask the user for it before finalizing the task list — do not silently omit it.
 
-**Impact rule:** Any component that consumes a changed API response, data structure, or interface is impacted — even if the change is additive and the component won't break. "It won't break" is not the same as "it isn't impacted." A frontend that receives a new field it doesn't yet display is impacted: it needs a task to decide what to do with that field.
+   Flag cross-repo tasks clearly (e.g. `target: otherRepoName`) so a musician running in that repo can pick them up. If you identify an impacted component but cannot determine its repo name or path from the documentation, ask the user for it before finalizing the task list — do not silently omit it.
+
+**Impact rule:** Any component that consumes a changed API response, data structure, or interface is impacted — even if the change is additive and the component won't break. "It won't break" is not the same as "it isn't impacted." From what you learned about the whole system in Step 1 when you read all the .md files, consider carefully all necessary changes across all repos that the documentation and user has made you aware of.
 
 5. **Create the working branch** in the target repo:
    ```
