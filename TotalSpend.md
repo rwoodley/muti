@@ -30,7 +30,7 @@ Write `total_spend` to DEDUCTION items and expose it through `LedgerTransaction`
 
 ### task-2
 
-**status:** pending
+**status:** done
 **target:** lpserver
 **description:**
 Expose `totalSpendUsd` in the `GET /api/billing/Balance` response.
@@ -45,7 +45,7 @@ Expose `totalSpendUsd` in the `GET /api/billing/Balance` response.
 
 ### task-3
 
-**status:** pending
+**status:** done
 **target:** lpclient
 **description:**
 Display lifetime total spend on the Billing page.
