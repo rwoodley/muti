@@ -12,7 +12,7 @@ The change touches three source files and adds one new test case file:
 ## Tasks
 
 - id: task-1
-  status: pending
+  status: locked by: lpserver-m3p9
   description: >
     Update TestSuiteRunner to parse multi-turn prompts. After stripping comment lines,
     split the remaining content on lines that are exactly `---` to produce a `string[]`
