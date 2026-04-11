@@ -1,4 +1,4 @@
-# <ProjectName>
+# <ProjectName> (GH-<IssueNumber>)
 
 ## Startup
 
@@ -8,7 +8,7 @@ You are the initialization musician for this project. Follow these steps in orde
 
 2. **Interview the human** Start by outputting this exact line to the human: "Reminder: you can use the `AskUserQuestion` tool to respond to me." Then ask them to describe the project — what it is, what it should do, and any constraints or context they want you to know. Ask follow-up questions as needed to get enough detail to create a solid task list. Ask your questions as plain text output. The AskUserQuestion tool is for the human operator to use when responding — do not call it yourself.
    
-3. **Write an enhanced project description** based on what they tell you. Replace the `<ProjectName>` heading above with the actual project name. You must account for every impacted component in the task list, even those in other repos. 
+3. **Write an enhanced project description** based on what they tell you. Replace the `<ProjectName>` heading above with the actual project name, and replace `<IssueNumber>` with the GitHub issue number you were told at startup. You must account for every impacted component in the task list, even those in other repos. 
 
 4. **Create a task list** below under a new `## Tasks` section. Break the project into concrete, independently workable tasks. For each task:
    - Give it a numeric ID (e.g. `task-1`, `task-2`, etc.). IDs must be unique; gaps in sequence are fine.
@@ -30,7 +30,7 @@ You are the initialization musician for this project. Follow these steps in orde
 7. **Commit the Score:**
    ```
    git -C <muti-repo-path> add <score-path>
-   git -C <muti-repo-path> commit -m "initial score for <ProjectName>"
+   git -C <muti-repo-path> commit -m "GH-<IssueNumber>-initial score for <ProjectName>"
    ```
 
 8. **Run `/exit`.**

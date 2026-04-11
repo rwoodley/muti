@@ -12,33 +12,24 @@ Muti coordinates multiple Claude Code instances ("musicians") working in paralle
 |------|---------|
 | `MUTI.md` | Immutable rules loaded into every musician via `--append-system-prompt-file`. Never edit this. |
 | `StartupScore.md` | Template copied when starting a new project. Contains init instructions for the first musician. |
-| `RunMusician.sh` | Bash script to launch a musician. Creates the Score if new, errors if the project already exists. |
-| `<ProjectName>.md` | Score files for active projects |
+| `RunMusician.sh` | Bash script to launch a musician. Creates the Score if new, reuses it if it already exists. |
+| `GH-<IssueNumber>-<ProjectName>.md` | Score files for active projects |
 
 ## Starting a New Project
 
 From the target repo directory, run:
 
 ```
-~/muti/RunMusician.sh <ProjectName>
+~/muti/RunMusician.sh <IssueNumber> <ProjectName>
 ```
+
+A GitHub issue number is **required**. The Score file will be named `GH-<IssueNumber>-<ProjectName>.md` and all commit messages will be prefixed with `GH-<IssueNumber>-`.
 
 RunMusician.sh will:
-1. Check that `<ProjectName>.md` does not already exist (errors if it does).
-2. Copy `StartupScore.md` to `<ProjectName>.md` in this repo.
-3. Launch a musician with MUTI.md as the appended system prompt and the Score path in the startup prompt.
+1. If `GH-<IssueNumber>-<ProjectName>.md` does not exist, copy `StartupScore.md` to `GH-<IssueNumber>-<ProjectName>.md`.
+2. Launch a musician with MUTI.md and the Score path appended to the system prompt, using `--permission-mode acceptEdits` to skip file permission prompts.
 
-The first musician sees the `## Startup` section in the Score, initializes the project (asks the human for a description, creates tasks, sets up the branch), removes the `## Startup` section, commits the Score, and exits.
-
-## Running a Musician on an Existing Project
-
-From the target repo directory:
-
-```
-~/muti/RunMusician.sh <ProjectName>
-```
-
-The musician reads the Score, picks an eligible task, locks it, does the work, marks it done, commits, and exits.
+On first run, the musician sees the `## Startup` section in the Score, interviews the human, creates tasks, sets up the branch, removes the `## Startup` section, commits the Score, and exits. On subsequent runs, the musician picks an eligible task, works on it, and waits for further instructions.
 
 ## Score Format
 
@@ -62,18 +53,18 @@ Tasks use inline status markers:
 
 **Score commits (Muti repo):**
 ```
-initial score for <ProjectName>
-lock task <task-id> for <musician-id>
-complete task <task-id>
-add tasks: <task-id>, <task-id>
-refine task <task-id>: <what changed>
+GH-<IssueNumber>-initial score for <ProjectName>
+GH-<IssueNumber>-lock task <task-id> for <musician-id>
+GH-<IssueNumber>-complete task <task-id>
+GH-<IssueNumber>-add tasks: <task-id>, <task-id>
+GH-<IssueNumber>-refine task <task-id>: <what changed>
 ```
 
 **Target repo commits:**
 ```
-[muti] <task-id>: <what was done>
+GH-<IssueNumber>-[muti] <task-id>: <what was done>
 ```
-e.g. `[muti] task-3: add user authentication endpoint`
+e.g. `GH-42-[muti] task-3: add user authentication endpoint`
 
 Task IDs are sequential numbers (`task-1`, `task-2`, etc.) but uniqueness matters more than strict sequence — gaps are fine.
 
