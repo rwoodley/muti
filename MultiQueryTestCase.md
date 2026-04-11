@@ -21,7 +21,7 @@ The change touches three source files and adds one new test case file:
   dependencies: []
 
 - id: task-2
-  status: pending
+  status: locked by: lpserver-m3p9
   description: >
     Update TestCaseRunner.RunAsync to accept `string[] prompts` instead of `string prompt`.
     Loop through prompts: call StartChatAsync for the first prompt (no sessionId),
